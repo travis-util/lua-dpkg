@@ -1,0 +1,8 @@
+language: lua
+
+dist: trusty
+
+addons:
+  apt:
+    packages:
+    - lua5.2
