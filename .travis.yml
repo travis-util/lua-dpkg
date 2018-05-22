@@ -6,3 +6,6 @@ addons:
   apt:
     packages:
     - lua5.2
+
+script:
+- lua hello.lua
