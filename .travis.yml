@@ -6,7 +6,7 @@ addons:
   apt:
     packages:
     - lua5.2
-    # - luarocks
+    - luarocks
 
 script:
 - command -v lua
