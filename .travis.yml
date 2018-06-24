@@ -33,7 +33,6 @@ before_install:
 - ./configure --help
 - ./configure # --prefix=$PREFIX --rocks-tree=/usr/local
 # - make build && make install
-- find /usr/local -name luarocks
 - sudo -H make bootstrap
 # --jobs=$JOBS
 # - ls --color $PREFIX
