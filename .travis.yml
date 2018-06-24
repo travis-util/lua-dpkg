@@ -76,7 +76,7 @@ install:
   for v in 5.2 5.1
   do
     cd $LUAROCKS_VERSION
-    ./configure --lua-version=$v # --prefix=$PREFIX --rocks-tree=/usr/local # Unknown flag: --program-suffix=5.2 
+    ./configure --lua-version=$v > configure.$v # --prefix=$PREFIX --rocks-tree=/usr/local # Unknown flag: --program-suffix=5.2 
     sudo -H make bootstrap
     # --jobs=$JOBS
     make distclean
