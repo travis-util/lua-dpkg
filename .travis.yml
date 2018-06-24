@@ -30,11 +30,13 @@ install:
 - lua -e 'require "socket"'
 # - sudo -H luarocks install luasec
 - lua -e 'require "ssl"'
+# As long as luarocks cannot use SSL connections, one should get the packages using another utility!
 
 
 - sudo -H luarocks install wsapi
 # Error fetching file: Failed downloading http://luarocks.org/repositories/rocks/manifest
 # URL redirected to unsupported protocol - install luasec to get HTTPS support.
+- find /usr/local -name wsapi.lua # This luarocks installs for lua 5.1
 - lua -e 'require "wsapi"'
 - sudo -H luarocks install wsapi-xavante
 - lua -e 'require "wsapi.xavante"'
