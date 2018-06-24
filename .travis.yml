@@ -47,7 +47,7 @@ before_install:
 - lua -e 'print("Hello World")'
 - command -v luarocks
 - luarocks
-- cat /etc/luarocks/config.lua
+- cat /etc/luarocks/config.lua || true
 - luarocks help path
 - luarocks path
 - luarocks help install
