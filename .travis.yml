@@ -71,7 +71,7 @@ install:
 - sudo -H $(command -v luarocks) install luasocket-3.0rc1-2.src.rock
 # Error: Your user does not have write permissions in /usr/local/lib/luarocks/rocks 
 # -- you may want to run as a privileged user or use your local tree with --local.
-- find $PREFIX -name socket.lua # This luarocks installs for lua 5.1
+- if [ -d "$PREFIX" ]; then find $PREFIX -name socket.lua ; fi
 - find /usr/local -name socket.lua # This luarocks installs for lua 5.1
 - lua5.1 -e 'require "socket"'
 - lua5.2 -e 'require "socket"'
