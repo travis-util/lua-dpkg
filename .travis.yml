@@ -79,7 +79,7 @@ install:
     ./configure --lua-version=$v > configure.$v # --prefix=$PREFIX --rocks-tree=/usr/local # Unknown flag: --program-suffix=5.2 
     sudo -H make bootstrap
     # --jobs=$JOBS
-    make distclean
+    make clean
     cd ..
 
     sudo -H $(command -v luarocks) install luasocket
