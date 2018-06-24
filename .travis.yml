@@ -40,7 +40,7 @@ install:
 - lua -e 'require "wsapi.xavante"'
 - apt-cache policy libfcgi-dev
 - apt-cache policy libfcgi0ldbl
-- sudo -H luarocks install wsapi-fastcgi
+- sudo -H luarocks install wsapi-fcgi
 - lua -e 'require "wsapi.fastcgi"'
 
 
