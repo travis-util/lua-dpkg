@@ -9,7 +9,7 @@ addons:
     - liblua5.1-dev # helping luarocks with lua 5.1
     - lua5.1
     - luarocks # This luarocks (Ubuntu 14.04.5 LTS Trusty) installs for lua 5.1 (see find)
-    - lua-sec # for luarocks install (but not required for luasocket)
+    # - lua-sec # for luarocks install (but not required for luasocket)
 
 before_install:
 - command -v lua
@@ -25,12 +25,16 @@ before_install:
 
 
 install:
-# - sudo -H luarocks install luasocket
+- curl https://luarocks.org/luasocket-3.0rc1-2.src.rock  --remote-name --remote-time --remote-header-name --silent
+# Modern versions of luarocks can use curl automatically.
+# Consider compalling an up to date version of luarocks.
+- sudo -H luarocks install luasocket-3.0rc1-2.src.rock
 # Error: Your user does not have write permissions in /usr/local/lib/luarocks/rocks 
 # -- you may want to run as a privileged user or use your local tree with --local.
 # - find /usr/local -name socket.lua # This luarocks installs for lua 5.1
 - lua -e 'require "socket"'
-# - sudo -H luarocks install luasec
+- curl https://luarocks.org/luasec-0.7alpha-2.src.rock  --remote-name --remote-time --remote-header-name --silent
+- sudo -H luarocks install luasec-0.7alpha-2.src.rock
 - lua -e 'require "ssl"'
 # As long as luarocks cannot use SSL connections, one should get the packages using another utility!
 
