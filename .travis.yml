@@ -73,19 +73,26 @@ install:
 # -- you may want to run as a privileged user or use your local tree with --local.
 
 - |
-  for lua in lua5.2
+  for v in 5.2 5.1
   do
+    cd $LUAROCKS_VERSION
+    ./configure --lua-version=$v # --prefix=$PREFIX --rocks-tree=/usr/local # Unknown flag: --program-suffix=5.2 
+    sudo -H make bootstrap
+    # --jobs=$JOBS
+    make distclean
+    cd ..
+
     sudo -H $(command -v luarocks) install luasocket
     sudo -H $(command -v luarocks) build luasec
     sudo -H $(command -v luarocks) install wsapi
     sudo -H $(command -v luarocks) install wsapi-xavante
     sudo -H $(command -v luarocks) install wsapi-fcgi
 
-    lua -e 'require "socket"'
-    lua -e 'require "ssl"'
-    lua -e 'require "wsapi"'
-    lua -e 'require "wsapi.xavante"'
-    lua -e 'require "wsapi.fastcgi"'
+    lua$v -e 'require "socket"'
+    lua$v -e 'require "ssl"'
+    lua$v -e 'require "wsapi"'
+    lua$v -e 'require "wsapi.xavante"'
+    lua$v -e 'require "wsapi.fastcgi"'
   done
 
 
@@ -94,6 +101,9 @@ install:
 # - lua5.1 -e 'require "wsapi"'
 # - lua5.1 -e 'require "wsapi.xavante"'
 # - lua5.1 -e 'require "wsapi.fastcgi"'
+
+- if [ -d "$PREFIX" ]; then find $PREFIX -name luarocks ; fi # "" allow space in directory name
+- find /usr/local -name luarocks
 
 - if [ -d "$PREFIX" ]; then find $PREFIX -name socket.lua ; fi # "" allow space in directory name
 - find /usr/local -name socket.lua # This luarocks installs for lua 5.1
