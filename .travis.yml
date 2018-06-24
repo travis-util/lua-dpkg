@@ -21,6 +21,7 @@ before_install:
 - luarocks help path
 - luarocks path
 - luarocks help install
+- apt-cache policy curl # for SSL downloads with luarocks
 
 
 install:
