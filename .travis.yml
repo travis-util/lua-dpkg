@@ -37,7 +37,7 @@ before_install:
 # --jobs=$JOBS
 # - ls --color $PREFIX
 # - ls --color $PREFIX/bin
-- find $PREFIX -name luarocks
+- if [ -d "$PREFIX" ]; then find $PREFIX -name luarocks ; fi
 - find /usr/local -name luarocks
 - cd ..
 
