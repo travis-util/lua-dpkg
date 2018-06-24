@@ -33,7 +33,7 @@ before_install:
 - cd $LUAROCKS_VERSION
 - ls --color
 - ./configure --help
-- ./configure # --prefix=$PREFIX --rocks-tree=/usr/local
+- ./configure --program-suffix=5.2 # --prefix=$PREFIX --rocks-tree=/usr/local
 # - make build && make install
 - sudo -H make bootstrap
 # --jobs=$JOBS
@@ -45,11 +45,11 @@ before_install:
 
 - command -v lua
 - lua -v
-- lua5.1 -v
 - lua5.2 -v
+- lua5.1 -v
 - lua -e 'print("Hello World")'
-- lua5.1 -e 'print("Hello World")'
 - lua5.2 -e 'print("Hello World")'
+- lua5.1 -e 'print("Hello World")'
 - command -v luarocks
 - luarocks
 - cat /etc/luarocks/config.lua || cat /tmp/local/etc/luarocks/config-5.1.lua || cat /usr/local/etc/luarocks/config-5.1.lua || true
@@ -59,9 +59,9 @@ before_install:
 - apt-cache policy curl # for SSL downloads with luarocks
 - apt-cache policy libssl-dev # for luasec
 - apt-cache policy luarocks
-- apt-cache policy lua5.1
-- apt-cache policy lua5.2
 # - apt-cache policy lua5.3
+- apt-cache policy lua5.2
+- apt-cache policy lua5.1
 
 
 install:
