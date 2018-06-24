@@ -33,7 +33,7 @@ before_install:
 - cd $LUAROCKS_VERSION
 - ls --color
 - ./configure --help
-- ./configure --program-suffix=5.2 # --prefix=$PREFIX --rocks-tree=/usr/local
+- ./configure # --prefix=$PREFIX --rocks-tree=/usr/local # Unknown flag: --program-suffix=5.2 
 # - make build && make install
 - sudo -H make bootstrap
 # --jobs=$JOBS
