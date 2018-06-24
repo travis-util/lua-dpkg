@@ -60,7 +60,7 @@ install:
 - curl https://luarocks.org/luasocket-3.0rc1-2.src.rock  --remote-name --remote-time --remote-header-name --silent
 # Modern versions of luarocks can use curl automatically.
 # Consider compalling an up to date version of luarocks.
-- sudo -H luarocks install luasocket-3.0rc1-2.src.rock
+- sudo -H $(command -v luarocks) install luasocket-3.0rc1-2.src.rock
 # Error: Your user does not have write permissions in /usr/local/lib/luarocks/rocks 
 # -- you may want to run as a privileged user or use your local tree with --local.
 # - find /usr/local -name socket.lua # This luarocks installs for lua 5.1
