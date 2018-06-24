@@ -8,7 +8,7 @@ addons:
     - lua5.1
     - liblua5.1-dev # helping luarocks with lua 5.1
     - luarocks # This luarocks (Ubuntu 14.04.5 LTS Trusty) installs for lua 5.1 (see find)
-    # - lua-sec # for luarocks install (but not required for luasocket)
+    - lua-sec # for luarocks install (but not required for luasocket)
 
 before_install:
 - command -v lua
@@ -23,13 +23,13 @@ before_install:
 
 
 install:
-- sudo -H luarocks install luasocket
+# - sudo -H luarocks install luasocket
 # Error: Your user does not have write permissions in /usr/local/lib/luarocks/rocks 
 # -- you may want to run as a privileged user or use your local tree with --local.
-- find /usr/local -name socket.lua # This luarocks installs for lua 5.1
+# - find /usr/local -name socket.lua # This luarocks installs for lua 5.1
 - lua -e 'require "socket"'
-- sudo -H luarocks install luasec
-- lua -e 'require "luasec"'
+# - sudo -H luarocks install luasec
+- lua -e 'require "ssl"'
 
 
 - sudo -H luarocks install wsapi
