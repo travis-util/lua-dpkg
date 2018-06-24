@@ -31,7 +31,7 @@ before_install:
 - cd $LUAROCKS_VERSION
 - ls --color
 - ./configure --help
-- ./configure --prefix=$PREFIX
+- ./configure --prefix=$PREFIX --rocks-tree=/usr/local
 # - make build && make install
 - find /usr/local -name luarocks
 - sudo make bootstrap
@@ -47,7 +47,7 @@ before_install:
 - lua -e 'print("Hello World")'
 - command -v luarocks
 - luarocks
-- cat /etc/luarocks/config.lua || true
+- cat /etc/luarocks/config.lua || cat /tmp/local/etc/luarocks/config-5.1.lua
 - luarocks help path
 - luarocks path
 - luarocks help install
