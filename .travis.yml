@@ -65,43 +65,47 @@ before_install:
 
 
 install:
-- curl https://luarocks.org/luasocket-3.0rc1-2.src.rock  --remote-name --remote-time --remote-header-name --silent
-# Modern versions of luarocks can use curl automatically.
-# Consider compalling an up to date version of luarocks.
-- sudo -H $(command -v luarocks) install luasocket
+# - curl https://luarocks.org/luasocket-3.0rc1-2.src.rock  --remote-name --remote-time --remote-header-name --silent
 # - sudo -H $(command -v luarocks) install luasocket-3.0rc1-2.src.rock
+# - curl https://luarocks.org/luasec-0.7alpha-2.src.rock  --remote-name --remote-time --remote-header-name --silent
+# luarocks can use curl automatically if it is detected during configure.
 # Error: Your user does not have write permissions in /usr/local/lib/luarocks/rocks 
 # -- you may want to run as a privileged user or use your local tree with --local.
+
+- sudo -H $(command -v luarocks) install luasocket
+- sudo -H $(command -v luarocks) build luasec
+- sudo -H $(command -v luarocks) install wsapi
+- sudo -H $(command -v luarocks) install wsapi-xavante
+- sudo -H $(command -v luarocks) install wsapi-fcgi
+
+- lua5.2 -e 'require "socket"'
+- lua5.2 -e 'require "ssl"'
+- lua5.2 -e 'require "wsapi"'
+- lua5.2 -e 'require "wsapi.xavante"'
+- lua5.2 -e 'require "wsapi.fastcgi"'
+
+#- lua5.1 -e 'require "socket"'
+#- lua5.1 -e 'require "ssl"'
+# - lua5.1 -e 'require "wsapi"'
+# - lua5.1 -e 'require "wsapi.xavante"'
+# - lua5.1 -e 'require "wsapi.fastcgi"'
+
 - if [ -d "$PREFIX" ]; then find $PREFIX -name socket.lua ; fi
 - find /usr/local -name socket.lua # This luarocks installs for lua 5.1
-- lua5.2 -e 'require "socket"'
-#- lua5.1 -e 'require "socket"'
-- curl https://luarocks.org/luasec-0.7alpha-2.src.rock  --remote-name --remote-time --remote-header-name --silent
 - ls /usr/lib/x86_64-linux-gnu/libssl.*
 - ls /usr/include/openssl/ssl.h
 # - find /usr -name ssl.h
 # - sudo -H env OPENSSL_DIR=/usr/lib/x86_64-linux-gnu OPENSSL_INCDIR=/usr/include $(command -v luarocks) build luasec-0.7alpha-2.src.rock OPENSSL_DIR=/usr/lib/x86_64-linux-gnu OPENSSL_INCDIR=/usr/include
-- sudo -H env OPENSSL_DIR=/usr $(command -v luarocks) build luasec
-- sudo -H $(command -v luarocks) build luasec OPENSSL_DIR=/usr
-- lua5.2 -e 'require "ssl"'
-#- lua5.1 -e 'require "ssl"'
+# - sudo -H env OPENSSL_DIR=/usr $(command -v luarocks) build luasec
+# - sudo -H $(command -v luarocks) build luasec OPENSSL_DIR=/usr
 # As long as luarocks cannot use SSL connections, one should get the packages using another utility!
 
 
-- sudo -H $(command -v luarocks) install wsapi
 # Error fetching file: Failed downloading http://luarocks.org/repositories/rocks/manifest
 # URL redirected to unsupported protocol - install luasec to get HTTPS support.
 - find /usr/local -name wsapi.lua # This luarocks installs for lua 5.1
-- lua5.2 -e 'require "wsapi"'
-# - lua5.1 -e 'require "wsapi"'
-- sudo -H $(command -v luarocks) install wsapi-xavante
-- lua5.2 -e 'require "wsapi.xavante"'
-# - lua5.1 -e 'require "wsapi.xavante"'
 - apt-cache policy libfcgi-dev
 - apt-cache policy libfcgi0ldbl
-- sudo -H $(command -v luarocks) install wsapi-fcgi
-- lua5.2 -e 'require "wsapi.fastcgi"'
-# - lua5.1 -e 'require "wsapi.fastcgi"'
 
 
 script:
