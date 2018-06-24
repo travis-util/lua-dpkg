@@ -22,6 +22,7 @@ before_install:
 - luarocks path
 - luarocks help install
 - apt-cache policy curl # for SSL downloads with luarocks
+- apt-cache policy libssl-dev # for luasec
 
 
 install:
