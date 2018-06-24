@@ -36,7 +36,7 @@ install:
 - lua -e 'require "socket"'
 - curl https://luarocks.org/luasec-0.7alpha-2.src.rock  --remote-name --remote-time --remote-header-name --silent
 - ls /usr/lib/x86_64-linux-gnu/libssl.*
-- sudo -H luarocks install luasec-0.7alpha-2.src.rock OPENSSL_DIR=/usr/lib/x86_64-linux-gnu
+- sudo -H env OPENSSL_DIR=/usr/lib/x86_64-linux-gnu luarocks build luasec-0.7alpha-2.src.rock OPENSSL_DIR=/usr/lib/x86_64-linux-gnu
 - lua -e 'require "ssl"'
 # As long as luarocks cannot use SSL connections, one should get the packages using another utility!
 
