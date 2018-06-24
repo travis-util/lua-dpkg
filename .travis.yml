@@ -13,6 +13,7 @@ env:
   - LUAROCKS_VERSION=luarocks-2.4.4
   # - PATH=$(pwd)/$LUA_VERSION/src:$PATH
   # - PATH=$PREFIX/bin:/home/travis/build/travis-util/lua-building/$LUA_VERSION/install/bin:$PATH
+  - PATH=$PREFIX/bin:$PATH
 
 
 addons:
@@ -30,12 +31,14 @@ before_install:
 - cd $LUAROCKS_VERSION
 - ls --color
 - ./configure --help
-- ./configure # --prefix=$PREFIX
+- ./configure --prefix=$PREFIX
 # - make build && make install
+- find /usr/local -name luarocks
 - sudo make bootstrap
 # --jobs=$JOBS
 # - ls --color $PREFIX
 # - ls --color $PREFIX/bin
+- find $PREFIX -name luarocks
 - find /usr/local -name luarocks
 - cd ..
 
@@ -50,6 +53,7 @@ before_install:
 - luarocks help install
 - apt-cache policy curl # for SSL downloads with luarocks
 - apt-cache policy libssl-dev # for luasec
+- apt-cache policy luarocks
 
 
 install:
