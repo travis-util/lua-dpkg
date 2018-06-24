@@ -20,10 +20,10 @@ addons:
   apt:
     packages:
     - libfcgi-dev
-    - liblua5.1-dev # helping luarocks with lua 5.1
     - liblua5.2-dev # helping luarocks with lua 5.1
-    - lua5.1
+    - liblua5.1-dev # helping luarocks with lua 5.1
     - lua5.2
+    - lua5.1
     # - luarocks # This luarocks (Ubuntu 14.04.5 LTS Trusty) installs for lua 5.1 (see find)
     # - lua-sec # for luarocks install (but not required for luasocket)
 
@@ -52,7 +52,7 @@ before_install:
 - lua5.1 -e 'print("Hello World")'
 - command -v luarocks
 - luarocks
-- cat /etc/luarocks/config.lua || cat /tmp/local/etc/luarocks/config-5.1.lua || cat /usr/local/etc/luarocks/config-5.1.lua || true
+- cat $(ls /etc/luarocks/config.lua /*/local/etc/luarocks/config-5.*.lua) || true
 - luarocks help path
 - luarocks path
 - luarocks help install
