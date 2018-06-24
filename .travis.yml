@@ -1,6 +1,19 @@
-language: lua
+language: c
+# sudo: true
+# compiler:
+  # - clang
 
-dist: trusty
+
+env:
+  global:
+  - PREFIX=/tmp/local
+  - INSTALL_TOP=$PREFIX
+  # - PKG_CONFIG_PATH=$PREFIX/lib/pkgconfig
+  # - LUA_VERSION=lua-5.3.4
+  - LUAROCKS_VERSION=luarocks-2.4.4
+  # - PATH=$(pwd)/$LUA_VERSION/src:$PATH
+  # - PATH=$PREFIX/bin:/home/travis/build/travis-util/lua-building/$LUA_VERSION/install/bin:$PATH
+
 
 addons:
   apt:
@@ -8,10 +21,24 @@ addons:
     - libfcgi-dev
     - liblua5.1-dev # helping luarocks with lua 5.1
     - lua5.1
-    - luarocks # This luarocks (Ubuntu 14.04.5 LTS Trusty) installs for lua 5.1 (see find)
+    # - luarocks # This luarocks (Ubuntu 14.04.5 LTS Trusty) installs for lua 5.1 (see find)
     # - lua-sec # for luarocks install (but not required for luasocket)
 
 before_install:
+- wget --quiet https://luarocks.org/releases/$LUAROCKS_VERSION.tar.gz
+- tar --gzip --extract --file=$LUAROCKS_VERSION.tar.gz
+- cd $LUAROCKS_VERSION
+- ls --color
+- ./configure --help
+- ./configure # --prefix=$PREFIX
+# - make build && make install
+- sudo make bootstrap
+# --jobs=$JOBS
+# - ls --color $PREFIX
+# - ls --color $PREFIX/bin
+- find /usr/local -name luarocks
+- cd ..
+
 - command -v lua
 - lua -v
 - lua -e 'print("Hello World")'
