@@ -31,10 +31,10 @@ before_install:
 - cd $LUAROCKS_VERSION
 - ls --color
 - ./configure --help
-- ./configure --prefix=$PREFIX --rocks-tree=/usr/local
+- ./configure # --prefix=$PREFIX --rocks-tree=/usr/local
 # - make build && make install
 - find /usr/local -name luarocks
-- sudo make bootstrap
+- sudo -H make bootstrap
 # --jobs=$JOBS
 # - ls --color $PREFIX
 # - ls --color $PREFIX/bin
