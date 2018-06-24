@@ -39,7 +39,7 @@ before_install:
 # --jobs=$JOBS
 # - ls --color $PREFIX
 # - ls --color $PREFIX/bin
-- if [ -d "$PREFIX" ]; then find $PREFIX -name luarocks ; fi
+- if [ -d "$PREFIX" ]; then find $PREFIX -name luarocks ; fi # "" allow space in directory name
 - find /usr/local -name luarocks
 - cd ..
 
@@ -72,17 +72,22 @@ install:
 # Error: Your user does not have write permissions in /usr/local/lib/luarocks/rocks 
 # -- you may want to run as a privileged user or use your local tree with --local.
 
-- sudo -H $(command -v luarocks) install luasocket
-- sudo -H $(command -v luarocks) build luasec
-- sudo -H $(command -v luarocks) install wsapi
-- sudo -H $(command -v luarocks) install wsapi-xavante
-- sudo -H $(command -v luarocks) install wsapi-fcgi
+- |
+  for lua in lua5.2
+  do
+    sudo -H $(command -v luarocks) install luasocket
+    sudo -H $(command -v luarocks) build luasec
+    sudo -H $(command -v luarocks) install wsapi
+    sudo -H $(command -v luarocks) install wsapi-xavante
+    sudo -H $(command -v luarocks) install wsapi-fcgi
 
-- lua5.2 -e 'require "socket"'
-- lua5.2 -e 'require "ssl"'
-- lua5.2 -e 'require "wsapi"'
-- lua5.2 -e 'require "wsapi.xavante"'
-- lua5.2 -e 'require "wsapi.fastcgi"'
+    lua -e 'require "socket"'
+    lua -e 'require "ssl"'
+    lua -e 'require "wsapi"'
+    lua -e 'require "wsapi.xavante"'
+    lua -e 'require "wsapi.fastcgi"'
+  done
+
 
 #- lua5.1 -e 'require "socket"'
 #- lua5.1 -e 'require "ssl"'
@@ -90,7 +95,7 @@ install:
 # - lua5.1 -e 'require "wsapi.xavante"'
 # - lua5.1 -e 'require "wsapi.fastcgi"'
 
-- if [ -d "$PREFIX" ]; then find $PREFIX -name socket.lua ; fi
+- if [ -d "$PREFIX" ]; then find $PREFIX -name socket.lua ; fi # "" allow space in directory name
 - find /usr/local -name socket.lua # This luarocks installs for lua 5.1
 - ls /usr/lib/x86_64-linux-gnu/libssl.*
 - ls /usr/include/openssl/ssl.h
