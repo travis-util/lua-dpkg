@@ -5,19 +5,25 @@ dist: trusty
 addons:
   apt:
     packages:
-    - lua5.2
-    - liblua5.2-dev # helping luarocks with lua 5.2
-    - luarocks
+    - lua5.1
+    - liblua5.1-dev # helping luarocks with lua 5.1
+    - luarocks # This luarocks (Ubuntu 14.04.5 LTS Trusty) installs for lua 5.1 (see find)
 
-script:
+before_install:
 - command -v lua
-- lua hello.lua
+- lua -v
 - lua -e 'print("Hello World")'
 - command -v luarocks
+- luarocks
+- luarocks help path
+- luarocks help install
+
+
+install:
 - sudo -H luarocks install luasocket
 # Error: Your user does not have write permissions in /usr/local/lib/luarocks/rocks 
 # -- you may want to run as a privileged user or use your local tree with --local.
-- find /usr/local -name socket.lua
+- find /usr/local -name socket.lua # This luarocks installs for lua 5.1
 - lua -e 'require "socket"'
 - sudo -H luarocks install wsapi
 - lua -e 'require "wsapi"'
@@ -27,3 +33,7 @@ script:
 - apt-cache policy libfcgi0ldbl
 - sudo -H luarocks install wsapi-fastcgi
 - lua -e 'require "wsapi.fastcgi"'
+
+
+script:
+- true
