@@ -125,3 +125,6 @@ install:
 
 script:
 - true
+
+after_script:
+- apt-cache policy lua5.3
