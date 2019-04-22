@@ -1,8 +1,8 @@
 language: c
 # sudo: true
-# compiler:
-  # - clang
-
+compiler:
+- clang
+- gcc
 
 env:
   global:
